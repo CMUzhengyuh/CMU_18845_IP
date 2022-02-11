@@ -19,6 +19,9 @@ void serve_dynamic(int fd, char *filename, char *cgiargs);
 void clienterror(int fd, char *cause, char *errnum, 
 		 char *shortmsg, char *longmsg);
 
+/* SIGCHLD handler claim */
+void sigchld_handler(int signal);
+
 int main(int argc, char **argv) 
 {
     int listenfd, connfd, port, clientlen;
@@ -31,12 +34,35 @@ int main(int argc, char **argv)
     }
     port = atoi(argv[1]);
 
+    /* SIGCHLD handler */
+    Signal(SIGCHLD, sigchld_handler);
+
+    // listenfd = Open_listenfd(port);
+    // while (1) {
+	//     clientlen = sizeof(clientaddr);
+	//     connfd = Accept(listenfd, (SA *)&clientaddr, &clientlen); //line:netp:tiny:accept
+	//     doit(connfd);                                             //line:netp:tiny:doit
+	//     Close(connfd);                                            //line:netp:tiny:close
+    // }
+
+    /* Implements concurrency using threads*/
     listenfd = Open_listenfd(port);
-    while (1) {
-	clientlen = sizeof(clientaddr);
-	connfd = Accept(listenfd, (SA *)&clientaddr, &clientlen); //line:netp:tiny:accept
-	doit(connfd);                                             //line:netp:tiny:doit
-	Close(connfd);                                            //line:netp:tiny:close
+    while (1)
+    {
+        clientlen = sizeof(clientaddr);
+        connfd = Accept(listenfd, (SA *)&clientaddr, (socklen_t*)&clientlen);
+        if (Fork() == 0) {
+            /* Close listening socket */
+            Close(listenfd);
+            /* Serves the client */
+            doit(connfd);
+            /* Close connection with client after doit() returns */
+            Close(connfd);
+            /* Exit thread */
+            exit(0);
+        }
+        /* Close parent connection with socket */
+        Close(connfd);
     }
 }
 /* $end tinymain */
@@ -231,3 +257,13 @@ void clienterror(int fd, char *cause, char *errnum,
     Rio_writen(fd, body, strlen(body));
 }
 /* $end clienterror */
+
+/* SIGCHLD handler function */
+void sigchld_handler(int signal) 
+{
+    pid_t childPid;
+
+    while ((childPid = waitpid(-1, 0, WNOHANG)) > 0) {
+        printf("Child %d terminates\n", childPid);
+    }
+}
