@@ -1,0 +1,33 @@
+<html>
+	<head>
+		<title>Please select your starter Pokemon!</title>
+	</head>
+	<body>
+		<h3>Please select your starter Pokemon!</h3>
+		<style>
+			img {
+			  margin: 50px auto;
+			  border: 1px solid #000;
+			}
+		  </style>
+		</head>
+		<body>
+		<img src="./1.jpg"  height="500" width="500">
+		<img src="./2.jpg"  height="500" width="500">
+		<img src="./3.jpg"  height="500" width="500">
+		</body>
+
+		<table>
+			<form action="./cgi-bin/starter" method="get">
+				<tr>
+					<td>Your Choice (From left to right 1 ~ 3): </td>
+					<td><input type="text" name="oper1" size="50"/></td>
+				</tr>
+				<tr>
+					<td>submit: </td>
+					<td><input type="submit" name="submit" value="submit"/></td>
+				</tr>
+			</form>
+		</table>
+	</body>
+</html>

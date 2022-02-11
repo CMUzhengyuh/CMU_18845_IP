@@ -32,3 +32,11 @@ Terminal Command
 * Uninstall:
 
         $ make clean
+
+* Find if a port is occupied:
+
+        $ sudo lsof -i :<PORT>
+
+* Close the port if needed:
+
+        $ sudo kill -9 <PID>
