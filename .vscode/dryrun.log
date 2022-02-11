@@ -1,9 +1,0 @@
-make --dry-run --always-make --keep-going --print-directory
-make: Entering directory `/Users/hobo/Documents/CMU_18845_IP'
-gcc -c -Wall -O2 csapp.c 
-gcc -c -Wall -O2 base.c 
-gcc -Wall -O2 -o base csapp.o base.o -lpthread
-gcc -c -Wall -O2 starter.c 
-gcc -Wall -O2 -o starter csapp.o starter.o -lpthread
-make: Leaving directory `/Users/hobo/Documents/CMU_18845_IP'
- 
