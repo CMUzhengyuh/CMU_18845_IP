@@ -1,14 +1,34 @@
-# CMU_18845_IP
+# 18845 Internet Service - Individual Project
 
-This is the Repo for 18845 Internet Service individual project
+The project has three parts:
+
+Part I:
+
+> Implement a baseline concurrent Web server in C (recommended) or another language of your choice (be careful).
+
+Part II:
+
+> Design an efficient protocol for serving dynamic content, and then implement an optimized version of the baseline concurrent server that uses your protocol.
+
+Part III:
+
+> Evaluate the performance of your baseline and optimized servers, characterizing the performance improvement of your new server.
+
+Terminal Command
 
 * Install:
 
         $ make
 
-* Test:
+* Baseline Server: 
+  
+        $ ./base <PORT>
+
+* Baseline Server Test:
   
         $ cd Downloads/httpd-2.4.52/
         $ ab -n <TOTAL_REQUEST> -c <TOTAL_CLIENT> http://localhost:<PORT>/
 
-Part I: Baseline Concurrent Web Server
+* Uninstall:
+
+        $ make clean
