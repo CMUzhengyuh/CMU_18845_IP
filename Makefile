@@ -1,4 +1,5 @@
-# Makefile of tinyserver
+# Makefile of Individual Project
+# Andrew ID: zhengyuh
 #
 
 CC = gcc
