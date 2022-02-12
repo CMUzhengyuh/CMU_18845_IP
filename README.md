@@ -27,7 +27,7 @@ Terminal Command
 * Baseline Server Test:
   
         $ cd Downloads/httpd-2.4.52/
-        $ ab -n <TOTAL_REQUEST> -c <TOTAL_CLIENT> http://localhost:<PORT>/
+        $ ab -n <TOTAL_REQUEST> -c <TOTAL_CLIENT> "http://localhost:8010/cgi-bin/starter?oper1=2&submit=submit"
 
 * Uninstall:
 
