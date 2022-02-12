@@ -7,7 +7,7 @@ CFLAGS = -Wall -O2
 OBJS = csapp.o
 LIBS = -lpthread
 
-all:tiny base starter concurrent optimize
+all:tiny base starter concurrent optimize sbuf
 
 tiny:$(OBJS) tiny.o
 	$(CC) $(CFLAGS) -o $@ $(OBJS) tiny.o $(LIBS)
@@ -29,6 +29,6 @@ starter:
 
 .PHONY:clean
 clean:
-	rm -f *.o tiny base starter concurrent optimize
+	rm -f *.o tiny base starter concurrent optimize sbuf
 	cd cgi-bin && $(MAKE) clean
 

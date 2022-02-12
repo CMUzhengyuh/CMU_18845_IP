@@ -9,6 +9,8 @@
 #define NTHREADS 4
 #define SBUFSIZE 32
 
+sbuf_t sbuf; /* shared buffer of connected descriptions */
+
 void doit(int fd);
 void read_requesthdrs(rio_t *rp);
 int parse_uri(char *uri, char *filename, char *cgiargs);
