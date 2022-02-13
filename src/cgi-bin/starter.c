@@ -23,8 +23,24 @@ int main(void) {
     	sprintf(content, "Welcome to Pokemon world! ");
 	}
     /* Make the response body */
-    sprintf(content, "%sYour choice is: %d\r\n<p>", 
-	    content, n1);
+    int choice;
+    
+    switch(n1) {
+        case 1:
+            choice = 1;
+            break;
+        case 2:
+            choice = 2;
+            break;
+        case 3:
+            choice = 3;
+            break;
+        default:
+            choice = 0;
+            break;
+
+    }
+    sprintf(content, "%sYour choice is: %d\r\n<p>", content, choice);
     sprintf(content, "%sThanks for visiting!\r\n", content);
   
     /* Generate the HTTP response */

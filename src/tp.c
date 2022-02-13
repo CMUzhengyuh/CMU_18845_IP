@@ -6,8 +6,8 @@
 #include "csapp.h"
 #include "sbuf.h"
 
-#define NTHREADS 4
-#define SBUFSIZE 32
+#define NTHREADS 25
+#define SBUFSIZE 100
 
 sbuf_t sbuf; /* shared buffer of connected descriptions */
 
