@@ -138,6 +138,39 @@ Part III:
   
 ![](./src/Report/compare.png)
 
-* Baseline Server vs. Optimized Server
+* Comparison Betwwen Baseline Server & Optimized Server
 
 ![](./src/Report/MT_vs_DL.png)
+
+### Static Content
+
+Since the optimization is not targeted at static contents, the original web server has the simplest mechanism and hence the highest service rate. Compared with servers adopted multiple thread optimization, prefork that utilized multiple process seems to be heavy-weighted because thread itself is more light-weighted than process.
+When it comes to servers using thread pool and dynamic linking, actually the RPS flunctuation range is similar to that of basic concurrent server.
+
+![](./src/Report/horizontal.png)
+
+### Dynamic Content
+
+Testing serial as well as concurrent requests to dynamic page, the result is very clear across all approaches (10000 Total Requests with 1 or 100 concurrent requests). The initial version of code from CSAPP:3e does not support concurrent requests so that I only conduct the non-concurrent tests on this server. It is surprising that although adopting optimized techniques, non-concurrent RPS of intermediate versions is not as good as the original version. However, the introduction of dynamic linking improve the RPS dramatically by approximately 8 times than baseline server. In addition, due to the setting of maximum threads in threading pool, RPS in the condition of concurrent is not as good as non-concurrent, which I will conduct further tests in the next paragraph.
+
+![](./src/Report/horizontal2.png)
+
+### Baseline Server vs. Optimized Server
+
+We can see the RPS of baseline server first improves as the concurrent requests increase until around 10 but decrease dramatically afterwards in that every time a request request arises, the server has to start a new thread to process the request. Hence, when the concurrent requests grows, the efficiency of multiple threading leads the RPS growing at the first time but with the approaching of boundaries, the server wastes more resources on managing thread life cycle manipulations.
+
+The difference between baseline server and optimized server lies in two parts: threading poll and dynamic linking.  
+
+Unlike baseline server, optimized server introduces thread pool which avoid re-creating or re-destructing threads but utilize existing running threads. Therefore, as concurrent requests grows rapidly, optimized server can adapt to the traffic by setting the maximum running threads at 100. Even if the concurrent requests exceed 100, the server would not add more threads but fully exploit existing threads. From the figure, we can see that the RPS decreasing ampltitude of optimized server (~15%) is far more smooth than baseline server (~85%).
+
+The overall improvement of absolute values is much more obvious: With the shared library, server does not have to compile all existing fuctions but call related functions in the library the same as local functions.  
+
+From the tail latency figure, we can conclude that optimize server can limit the 5% slowest request latency at linear growth as concurrent request growth with the help of thread pool. On the other hand, baseline server has to keep a portion of requests waiting so that the tail latency grows in a polynomial way.
+
+#### Throughput
+
+![](./src/Report/vertical.png)
+
+#### Tail Latency
+
+![](./src/Report/tail.png)
