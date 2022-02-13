@@ -90,7 +90,7 @@ Part III:
 * Server Test - Test Tool : Apach Benchmark (e.g. **PORT 8010**)
 
         $ cd Downloads/httpd-2.4.52/
-        $ ab -n <TOTAL_REQUEST> -c <TOTAL_CLIENT> "<URL"
+        $ ab -n <TOTAL_REQUEST> -c <TOTAL_CLIENT> "URL"
         
     * Static Test URL : http://localhost:8010/
 
