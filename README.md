@@ -1,10 +1,12 @@
 # 18845 Internet Service - Individual Project
 
+Andrew ID : zhengyuh
+
 ## 1. Project Requirement
 
 Part I:
 
-> Implement a baseline concurrent Web server in C (recommended) or another language of your choice (be careful).
+> Implement a baseline concurrent Web server in C or another language of your choice.
 
 Part II:
 
